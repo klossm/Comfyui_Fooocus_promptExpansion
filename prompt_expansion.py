@@ -107,9 +107,9 @@ class FooocusExpansion:
         if prompt == '':
             return ''
 
-        if self.patcher.current_device != self.patcher.load_device:
+        if self.patcher.load_device != self.model.device:
            
-            model_management.load_model_gpu(self.patcher)
+            self.model.to(self.patcher.load_device)
 
         seed = int(seed) % self.SEED_LIMIT_NUMPY
         set_seed(seed)
